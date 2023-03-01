@@ -1,7 +1,9 @@
 package com.musula.drones.controller;
 
 import com.musula.drones.dto.DroneDto;
+import com.musula.drones.dto.MedicationDto;
 import com.musula.drones.service.DroneService;
+import com.musula.drones.service.MedicationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,8 @@ public class DispatchController {
 
   private final DroneService droneService;
 
+  private final MedicationService medicationService;
+
   /**
    * It takes a DroneDto object as a parameter, saves it, and returns a ResponseEntity with a status
    * code of 201 (created) and the saved DroneDto object
@@ -29,5 +33,11 @@ public class DispatchController {
   @PostMapping
   public ResponseEntity<DroneDto> save(@RequestBody DroneDto droneDto) {
     return ResponseEntity.created(URI.create("/api/v1/drones")).body(droneService.save(droneDto));
+  }
+
+  @PostMapping("/medications")
+  public ResponseEntity<MedicationDto> save(@RequestBody MedicationDto medicationDto) {
+    return ResponseEntity.created(URI.create("/api/v1/drones/medications"))
+        .body(medicationService.save(medicationDto));
   }
 }

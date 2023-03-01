@@ -33,4 +33,11 @@ public class DroneServiceImpl implements DroneService {
     Drone savedDrone = droneRepository.save(drone);
     return droneMapper.toDto(savedDrone);
   }
+
+  @Override
+  public Drone findBySerialNumber(String serialNumber) {
+    return droneRepository
+        .findBySerialNumber(serialNumber)
+        .orElseThrow(() -> new RuntimeException("Could not find"));
+  }
 }

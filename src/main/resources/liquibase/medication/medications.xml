@@ -14,6 +14,8 @@
             <column name="weight" type="int"/>
             <column name="code" type="varchar(255)"/>
             <column name="image_url" type="varchar(255)"/>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
         </createTable>
 
     </changeSet>
