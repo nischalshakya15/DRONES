@@ -6,5 +6,6 @@
 
     <include file="classpath:liquibase/drone/drones.xml" relativeToChangelogFile="false"/>
     <include file="classpath:liquibase/medication/medications.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:liquibase/drone_medications/drone_medications.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

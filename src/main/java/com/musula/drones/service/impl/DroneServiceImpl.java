@@ -25,10 +25,12 @@ public class DroneServiceImpl implements DroneService {
    */
   @Override
   public DroneDto save(DroneDto droneDto) {
-    Drone drone = droneRepository.save(droneMapper.toEntity(droneDto));
+    Drone drone = droneMapper.toEntity(droneDto);
     drone.setWeightLimit(DroneConstant.WEIGHT_LIMIT);
     drone.setBatteryPercentage(DroneConstant.BATTERY_PERCENTAGE);
     drone.setState(DroneConstant.DEFAULT_STATE);
-    return droneMapper.toDto(drone);
+
+    Drone savedDrone = droneRepository.save(drone);
+    return droneMapper.toDto(savedDrone);
   }
 }
