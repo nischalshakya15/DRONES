@@ -16,7 +16,7 @@ public class Medication extends BaseEntity {
   private String name;
 
   @Column(name = "weight")
-  private Long weight;
+  private Integer weight;
 
   @Column(name = "code")
   private String code;

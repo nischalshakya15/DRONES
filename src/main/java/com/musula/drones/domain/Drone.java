@@ -16,11 +16,11 @@ public class Drone extends BaseEntity {
   private String serialNumber;
 
   @Column(name = "weight_limit")
-  private Long weightLimit;
+  private Integer weightLimit;
 
   @Column(name = "battery_percentage")
-  private Long batteryPercentage;
+  private Integer batteryPercentage;
 
-  @Column(name = "state")
+  @Column(name = "state", length = 100)
   private String state;
 }
