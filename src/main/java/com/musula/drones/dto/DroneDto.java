@@ -13,9 +13,9 @@ public class DroneDto extends BaseDto {
 
   private DroneModel model;
 
-  private Integer weight_limit;
+  private Integer weightLimit;
 
-  private Integer battery_percentage;
+  private Integer batteryPercentage;
 
   private DroneState state;
 }

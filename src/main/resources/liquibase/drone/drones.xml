@@ -10,9 +10,15 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="serial_number" type="varchar(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
             <column name="weight_limit" type="int"/>
             <column name="battery_percentage" type="int"/>
             <column name="state" type="varchar(100)"/>
+            <column name="model" type="varchar(100)"/>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
         </createTable>
 
     </changeSet>
