@@ -1,7 +1,10 @@
 package com.musula.drones.domain;
 
+import com.musula.drones.enums.State;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,4 +26,8 @@ public class Medication extends BaseEntity {
 
   @Column(name = "image_url")
   private String imageURL;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = "state")
+  private State state;
 }

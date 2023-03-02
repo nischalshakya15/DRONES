@@ -1,5 +1,6 @@
 package com.musula.drones.service.impl;
 
+import com.musula.drones.constant.DroneConstant;
 import com.musula.drones.domain.Drone;
 import com.musula.drones.domain.DroneMedication;
 import com.musula.drones.domain.Medication;
@@ -37,6 +38,7 @@ public class MedicationServiceImpl implements MedicationService {
     checkDrone(drone, medicationDto.getWeight());
 
     Medication medication = medicationMapper.toEntity(medicationDto);
+    medication.setState(DroneConstant.LOADED_STATE);
     Medication savedMedication = medicationRepository.save(medication);
 
     DroneMedication droneMedication = new DroneMedication();
@@ -46,6 +48,7 @@ public class MedicationServiceImpl implements MedicationService {
 
     MedicationDto savedMedicationDto = medicationMapper.toDto(savedMedication);
     savedMedicationDto.setDroneSerialNumber(drone.getSerialNumber());
+    savedMedicationDto.setState(savedMedication.getState());
 
     return savedMedicationDto;
   }

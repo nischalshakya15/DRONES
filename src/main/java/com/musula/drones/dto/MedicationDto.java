@@ -1,5 +1,6 @@
 package com.musula.drones.dto;
 
+import com.musula.drones.enums.State;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,4 +17,6 @@ public class MedicationDto extends BaseDto {
   private String imageURL;
 
   private String droneSerialNumber;
+
+  private State state;
 }
