@@ -25,6 +25,12 @@ public class MedicationServiceImpl implements MedicationService {
 
   private final DroneMedicationRepository droneMedicationRepository;
 
+  /**
+   * The function saves a medication and creates a relationship between the medication and the drone
+   *
+   * @param medicationDto The medicationDto object that is passed in from the controller.
+   * @return MedicationDto
+   */
   @Override
   public MedicationDto save(MedicationDto medicationDto) {
     Drone drone = droneService.findBySerialNumber(medicationDto.getDroneSerialNumber());
@@ -38,27 +44,52 @@ public class MedicationServiceImpl implements MedicationService {
     droneMedication.setMedication(medication);
     droneMedicationRepository.save(droneMedication);
 
-    return medicationMapper.toDto(savedMedication);
+    MedicationDto savedMedicationDto = medicationMapper.toDto(savedMedication);
+    savedMedicationDto.setDroneSerialNumber(drone.getSerialNumber());
+
+    return savedMedicationDto;
   }
 
+  /**
+   * Check if the drone is ready to deliver medication.
+   *
+   * @param drone The drone that will be used to deliver the medication.
+   * @param medicationWeight The weight of the medication that the drone is carrying.
+   */
   public void checkDrone(Drone drone, Integer medicationWeight) {
     checkIfTheBatteryIsLessThanTwentyFivePercent(drone.getBatteryPercentage());
     checkIfTheDroneStateIsIdle(drone.getState());
     checkIfTheWeightLimitIsGreaterThanMedicationWeight(drone.getWeightLimit(), medicationWeight);
   }
 
+  /**
+   * Check if the battery is less than 25%.
+   *
+   * @param batteryPercentage The percentage of the battery.
+   */
   private void checkIfTheBatteryIsLessThanTwentyFivePercent(Integer batteryPercentage) {
     if (batteryPercentage < 25) {
       throw new RuntimeException("Invalid battery");
     }
   }
 
+  /**
+   * Check if the drone state is idle.
+   *
+   * @param droneState The current state of the drone.
+   */
   private void checkIfTheDroneStateIsIdle(DroneState droneState) {
     if (droneState != DroneState.IDLE) {
       throw new RuntimeException("Invalid");
     }
   }
 
+  /**
+   * Check if the weight limit is greater than medication weight.
+   *
+   * @param droneWeight The weight of the drone
+   * @param medicationWeight The weight of the medication that the drone is carrying.
+   */
   private void checkIfTheWeightLimitIsGreaterThanMedicationWeight(
       Integer droneWeight, Integer medicationWeight) {
     if (droneWeight < medicationWeight) {
