@@ -1,7 +1,7 @@
 package com.musula.drones.domain;
 
 import com.musula.drones.enums.DroneModel;
-import com.musula.drones.enums.DroneState;
+import com.musula.drones.enums.State;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -31,5 +31,5 @@ public class Drone extends BaseEntity {
 
   @Enumerated(EnumType.STRING)
   @Column(name = "state", length = 100)
-  private DroneState state;
+  private State state;
 }

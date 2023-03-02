@@ -3,7 +3,7 @@ package com.musula.drones.service.impl;
 import com.musula.drones.constant.DroneConstant;
 import com.musula.drones.domain.Drone;
 import com.musula.drones.dto.DroneDto;
-import com.musula.drones.enums.DroneState;
+import com.musula.drones.enums.State;
 import com.musula.drones.mapper.DroneMapper;
 import com.musula.drones.repository.DroneRepository;
 import com.musula.drones.service.DroneService;
@@ -57,7 +57,7 @@ public class DroneServiceImpl implements DroneService {
    * @return A list of DroneDto objects.
    */
   @Override
-  public List<DroneDto> findAllByState(DroneState droneState) {
+  public List<DroneDto> findAllByState(State droneState) {
     List<Drone> dronesByState = droneRepository.findAllByState(droneState);
     return droneMapper.toDto(dronesByState);
   }

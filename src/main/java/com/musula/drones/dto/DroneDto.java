@@ -1,7 +1,7 @@
 package com.musula.drones.dto;
 
 import com.musula.drones.enums.DroneModel;
-import com.musula.drones.enums.DroneState;
+import com.musula.drones.enums.State;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,5 +17,5 @@ public class DroneDto extends BaseDto {
 
   private Integer batteryPercentage;
 
-  private DroneState state;
+  private State state;
 }

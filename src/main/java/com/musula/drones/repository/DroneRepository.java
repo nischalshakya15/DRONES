@@ -1,7 +1,7 @@
 package com.musula.drones.repository;
 
 import com.musula.drones.domain.Drone;
-import com.musula.drones.enums.DroneState;
+import com.musula.drones.enums.State;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +13,5 @@ public interface DroneRepository extends JpaRepository<Drone, Long> {
 
   Optional<Drone> findBySerialNumber(String serialNumber);
 
-  List<Drone> findAllByState(DroneState droneState);
+  List<Drone> findAllByState(State droneState);
 }

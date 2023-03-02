@@ -1,6 +1,6 @@
 package com.musula.drones.enums;
 
-public enum DroneState {
+public enum State {
   IDLE,
   LOADING,
   LOADED,

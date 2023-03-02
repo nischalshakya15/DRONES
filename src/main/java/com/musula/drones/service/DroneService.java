@@ -2,7 +2,7 @@ package com.musula.drones.service;
 
 import com.musula.drones.domain.Drone;
 import com.musula.drones.dto.DroneDto;
-import com.musula.drones.enums.DroneState;
+import com.musula.drones.enums.State;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface DroneService {
 
   Drone findBySerialNumber(String serialNumber);
 
-  List<DroneDto> findAllByState(DroneState droneState);
+  List<DroneDto> findAllByState(State droneState);
 
   DroneDto findDroneBySerialNumber(String serialNumber);
 

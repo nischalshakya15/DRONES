@@ -4,8 +4,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="02-Medications" author="Nischal Shakya">
-
+    <changeSet id="01-Medications" author="Nischal Shakya">
         <createTable tableName="medications">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -17,7 +16,12 @@
             <column name="created_at" type="datetime"/>
             <column name="updated_at" type="datetime"/>
         </createTable>
+    </changeSet>
 
+    <changeSet id="02-Medications" author="Nischal Shakya">
+        <addColumn tableName="medications">
+            <column name="state" type="varchar(100)"/>
+        </addColumn>
     </changeSet>
 
 </databaseChangeLog>

@@ -4,7 +4,7 @@ import com.musula.drones.domain.Drone;
 import com.musula.drones.domain.DroneMedication;
 import com.musula.drones.domain.Medication;
 import com.musula.drones.dto.MedicationDto;
-import com.musula.drones.enums.DroneState;
+import com.musula.drones.enums.State;
 import com.musula.drones.mapper.MedicationMapper;
 import com.musula.drones.repository.DroneMedicationRepository;
 import com.musula.drones.repository.MedicationRepository;
@@ -78,8 +78,8 @@ public class MedicationServiceImpl implements MedicationService {
    *
    * @param droneState The current state of the drone.
    */
-  private void checkIfTheDroneStateIsIdle(DroneState droneState) {
-    if (droneState != DroneState.IDLE) {
+  private void checkIfTheDroneStateIsIdle(State droneState) {
+    if (droneState != State.IDLE) {
       throw new RuntimeException("Invalid");
     }
   }

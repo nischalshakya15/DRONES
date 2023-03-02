@@ -1,6 +1,6 @@
 package com.musula.drones.constant;
 
-import com.musula.drones.enums.DroneState;
+import com.musula.drones.enums.State;
 
 public class DroneConstant {
 
@@ -8,5 +8,5 @@ public class DroneConstant {
 
   public static final Integer BATTERY_PERCENTAGE = 100;
 
-  public static final DroneState DEFAULT_STATE = DroneState.IDLE;
+  public static final State DEFAULT_STATE = State.IDLE;
 }

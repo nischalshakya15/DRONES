@@ -2,7 +2,7 @@ package com.musula.drones.controller;
 
 import com.musula.drones.dto.DroneDto;
 import com.musula.drones.dto.MedicationDto;
-import com.musula.drones.enums.DroneState;
+import com.musula.drones.enums.State;
 import com.musula.drones.service.DroneService;
 import com.musula.drones.service.MedicationService;
 import lombok.AllArgsConstructor;
@@ -69,7 +69,7 @@ public class DispatchController {
    * @return A list of DroneDto objects
    */
   @GetMapping("/states")
-  public ResponseEntity<List<DroneDto>> findByState(@RequestParam("state") DroneState state) {
+  public ResponseEntity<List<DroneDto>> findByState(@RequestParam("state") State state) {
     return ResponseEntity.ok(droneService.findAllByState(state));
   }
 
