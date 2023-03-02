@@ -14,6 +14,8 @@ import com.musula.drones.service.MedicationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class MedicationServiceImpl implements MedicationService {
@@ -51,6 +53,12 @@ public class MedicationServiceImpl implements MedicationService {
     savedMedicationDto.setState(savedMedication.getState());
 
     return savedMedicationDto;
+  }
+
+  @Override
+  public List<MedicationDto> findByMedicationIdIn(List<Long> ids, State state) {
+    List<Medication> medications = medicationRepository.findAllByIdInAndState(ids, state);
+    return medicationMapper.toDto(medications);
   }
 
   /**

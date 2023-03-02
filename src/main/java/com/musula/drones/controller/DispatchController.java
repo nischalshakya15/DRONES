@@ -1,8 +1,10 @@
 package com.musula.drones.controller;
 
 import com.musula.drones.dto.DroneDto;
+import com.musula.drones.dto.DroneMedicationDto;
 import com.musula.drones.dto.MedicationDto;
 import com.musula.drones.enums.State;
+import com.musula.drones.service.DroneMedicationService;
 import com.musula.drones.service.DroneService;
 import com.musula.drones.service.MedicationService;
 import lombok.AllArgsConstructor;
@@ -25,6 +27,8 @@ public class DispatchController {
   private final DroneService droneService;
 
   private final MedicationService medicationService;
+
+  private final DroneMedicationService droneMedicationService;
 
   /**
    * This function returns a list of all drones in the database
@@ -83,5 +87,21 @@ public class DispatchController {
   public ResponseEntity<DroneDto> findDroneBySerialNumber(
       @RequestParam("serialNumber") String serialNumber) {
     return ResponseEntity.ok(droneService.findDroneBySerialNumber(serialNumber));
+  }
+
+  /**
+   * It returns a list of medications that are in a specific state and are assigned to a specific
+   * drone
+   *
+   * @param serialNumber The serial number of the drone.
+   * @param state The state of the medication.
+   * @return A list of DroneMedicationDto objects.
+   */
+  @GetMapping("/medications")
+  public ResponseEntity<DroneMedicationDto> findMedicationBySerialNumberAndState(
+      @RequestParam("serialNumber") String serialNumber, @RequestParam("state") State state) {
+    return ResponseEntity.ok(
+        droneMedicationService.findAllMedicationsByDroneSerialNumberAndMedicationState(
+            serialNumber, state));
   }
 }
