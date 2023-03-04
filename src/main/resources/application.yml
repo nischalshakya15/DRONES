@@ -16,3 +16,8 @@ spring:
       path: /h2-console
   liquibase:
     change-log: classpath:liquibase/master.xml
+
+springdoc:
+  swagger-ui:
+    operations-sorter: method
+    path: /swagger-ui.html
