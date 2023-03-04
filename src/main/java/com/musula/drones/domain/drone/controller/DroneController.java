@@ -1,11 +1,11 @@
 package com.musula.drones.domain.drone.controller;
 
-import com.musula.drones.domain.drone.dto.DroneDto;
-import com.musula.drones.domain.dronemedication.dto.DroneMedicationDto;
-import com.musula.drones.domain.medication.dto.MedicationDto;
 import com.musula.drones.common.enums.State;
-import com.musula.drones.domain.dronemedication.service.DroneMedicationService;
+import com.musula.drones.domain.drone.dto.DroneDto;
 import com.musula.drones.domain.drone.service.DroneService;
+import com.musula.drones.domain.dronemedication.dto.DroneMedicationDto;
+import com.musula.drones.domain.dronemedication.service.DroneMedicationService;
+import com.musula.drones.domain.medication.dto.MedicationDto;
 import com.musula.drones.domain.medication.service.MedicationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +41,7 @@ public class DroneController {
   }
 
   /**
-   * It takes a DroneDto object as a parameter, saves it, and returns a ResponseEntity with a status
-   * code of 201 (created) and the saved DroneDto object
+   * 01. Register a Drone.
    *
    * @param droneDto The object that will be sent to the server.
    * @return A ResponseEntity with a status of 201 (created) and a body of the DroneDto that was
@@ -54,8 +53,7 @@ public class DroneController {
   }
 
   /**
-   * The function is a POST request to the /medications endpoint. It takes a MedicationDto object as
-   * a parameter and returns a MedicationDto object
+   * 02. Load a drone with medication items.
    *
    * @param medicationDto This is the object that will be sent to the server.
    * @return A ResponseEntity with a status of 201 (created) and a body of the saved MedicationDto.
@@ -67,31 +65,9 @@ public class DroneController {
   }
 
   /**
-   * "Find all drones with the given state and return them as a list of DroneDto objects."
+   * 03. Check loaded medication items for a given drone.
    *
-   * @param state DroneState
-   * @return A list of DroneDto objects
-   */
-  @GetMapping("/states")
-  public ResponseEntity<List<DroneDto>> findByState(@RequestParam("state") State state) {
-    return ResponseEntity.ok(droneService.findAllByState(state));
-  }
-
-  /**
-   * "Find a drone by its serial number and return it as a DroneDto."
-   *
-   * @param serialNumber The serial number of the drone you want to find.
-   * @return A DroneDto object
-   */
-  @GetMapping("/serial-numbers")
-  public ResponseEntity<DroneDto> findDroneBySerialNumber(
-      @RequestParam("serialNumber") String serialNumber) {
-    return ResponseEntity.ok(droneService.findDroneBySerialNumber(serialNumber));
-  }
-
-  /**
-   * It returns a list of medications that are in a specific state and are assigned to a specific
-   * drone
+   * <p>Take drone serialNumber and state of the medication items.
    *
    * @param serialNumber The serial number of the drone.
    * @param state The state of the medication.
@@ -103,5 +79,32 @@ public class DroneController {
     return ResponseEntity.ok(
         droneMedicationService.findAllMedicationsByDroneSerialNumberAndMedicationState(
             serialNumber, state));
+  }
+
+  /**
+   * 04. Check available drones for loading.
+   *
+   * <p>Take State as the parameter to find the drones.
+   *
+   * @param state State
+   * @return A list of DroneDto objects
+   */
+  @GetMapping("/states")
+  public ResponseEntity<List<DroneDto>> findByState(@RequestParam("state") State state) {
+    return ResponseEntity.ok(droneService.findAllByState(state));
+  }
+
+  /**
+   * 05. Check drone batter level for a given drone.
+   *
+   * <p>Take the Drone serialNumber to find all the information of the Drone.
+   *
+   * @param serialNumber The serial number of the drone you want to find.
+   * @return A DroneDto object
+   */
+  @GetMapping("/serial-numbers")
+  public ResponseEntity<DroneDto> findDroneBySerialNumber(
+      @RequestParam("serialNumber") String serialNumber) {
+    return ResponseEntity.ok(droneService.findDroneBySerialNumber(serialNumber));
   }
 }
