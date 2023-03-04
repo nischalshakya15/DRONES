@@ -11,6 +11,8 @@ import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDateTime;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class MedicationDto extends BaseDto {
@@ -44,4 +46,25 @@ public class MedicationDto extends BaseDto {
   private String droneSerialNumber;
 
   private State state;
+
+  public MedicationDto() {}
+
+  public MedicationDto(
+      Long id,
+      String name,
+      Integer weight,
+      String code,
+      String imageURL,
+      String droneSerialNumber,
+      State state,
+      LocalDateTime createdAt,
+      LocalDateTime updatedAt) {
+    super(id, createdAt, updatedAt);
+    this.name = name;
+    this.weight = weight;
+    this.code = code;
+    this.imageURL = imageURL;
+    this.droneSerialNumber = droneSerialNumber;
+    this.state = state;
+  }
 }

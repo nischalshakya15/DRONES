@@ -12,4 +12,5 @@ import java.util.List;
 public class DroneMedicationDto extends DroneDto {
 
   private List<MedicationDto> medications;
+
 }

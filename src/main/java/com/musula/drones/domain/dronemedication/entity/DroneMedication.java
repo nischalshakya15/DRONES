@@ -27,4 +27,7 @@ public class DroneMedication extends BaseEntity {
   @ManyToOne
   @JoinColumn(name = "medication_id")
   private Medication medication;
+
+  @Column(name = "medication_id", insertable = false, updatable = false)
+  private Long medicationID;
 }

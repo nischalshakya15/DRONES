@@ -1,5 +1,6 @@
 package com.musula.drones.common.base;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,7 +19,11 @@ public class BaseEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @CreationTimestamp private LocalDateTime createdAt;
+  @CreationTimestamp
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+  private LocalDateTime createdAt;
 
-  @UpdateTimestamp private LocalDateTime updatedAt;
+  @UpdateTimestamp
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+  private LocalDateTime updatedAt;
 }
