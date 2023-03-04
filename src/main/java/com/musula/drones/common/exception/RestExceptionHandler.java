@@ -45,6 +45,49 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
   }
 
   /**
+   * It handles the InvalidDroneStateException and returns a response with the message and the
+   * status code.
+   *
+   * @param exception The exception that was thrown.
+   * @return A ResponseEntity object is being returned.
+   */
+  @ExceptionHandler(InvalidDroneStateException.class)
+  protected ResponseEntity<APIException> handleInvalidDroneStateException(
+      InvalidDroneStateException exception) {
+    APIException apiException =
+        new APIException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
+    return buildResponseEntity(apiException);
+  }
+
+  /**
+   * It handles the exception thrown by the DroneMedicationWeightExceedException class.
+   *
+   * @param exception The exception object that was thrown.
+   * @return A ResponseEntity with the APIException
+   */
+  @ExceptionHandler(DroneMedicationWeightExceedException.class)
+  protected ResponseEntity<APIException> handleDroneMedicationWeightExceedException(
+      DroneMedicationWeightExceedException exception) {
+    APIException apiException =
+        new APIException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
+    return buildResponseEntity(apiException);
+  }
+
+  /**
+   * It handles the exception and returns a response entity with the exception message.
+   *
+   * @param exception The exception that was thrown.
+   * @return A ResponseEntity with the APIException as the body.
+   */
+  @ExceptionHandler(NotEnoughBatteryException.class)
+  protected ResponseEntity<APIException> handleNotEnoughBatteryException(
+      NotEnoughBatteryException exception) {
+    APIException apiException =
+        new APIException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
+    return buildResponseEntity(apiException);
+  }
+
+  /**
    * We are overriding the default Spring Boot exception handler for MethodArgumentNotValidException
    * and returning a map of field names and error messages
    *
