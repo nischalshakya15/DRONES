@@ -16,8 +16,8 @@ public class MedicationValidation {
    * @param medicationWeight The weight of the medication that the drone is carrying.
    */
   public static void checkDrone(Drone drone, Integer medicationWeight) {
-    checkIfTheBatteryIsLessThanTwentyFivePercent(drone.getBatteryPercentage());
     checkIfTheDroneStateIsIdle(drone.getState());
+    checkIfTheBatteryIsLessThanTwentyFivePercent(drone.getBatteryPercentage());
     checkIfTheWeightLimitIsGreaterThanMedicationWeight(drone.getWeightLimit(), medicationWeight);
   }
 
