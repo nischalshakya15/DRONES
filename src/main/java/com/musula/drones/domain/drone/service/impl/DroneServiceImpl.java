@@ -2,7 +2,7 @@ package com.musula.drones.domain.drone.service.impl;
 
 import com.musula.drones.common.constant.DroneConstant;
 import com.musula.drones.common.enums.State;
-import com.musula.drones.common.exception.DroneAlreadyExistException;
+import com.musula.drones.common.exception.drone.DroneAlreadyExistException;
 import com.musula.drones.common.exception.NotFoundException;
 import com.musula.drones.domain.drone.constant.DroneExceptionConstant;
 import com.musula.drones.domain.drone.dto.DroneDto;

@@ -1,4 +1,4 @@
-package com.musula.drones.common.exception;
+package com.musula.drones.common.exception.drone;
 
 public class DroneMedicationWeightExceedException extends RuntimeException {
 

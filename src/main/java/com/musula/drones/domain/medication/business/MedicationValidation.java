@@ -1,9 +1,9 @@
 package com.musula.drones.domain.medication.business;
 
 import com.musula.drones.common.enums.State;
-import com.musula.drones.common.exception.DroneMedicationWeightExceedException;
-import com.musula.drones.common.exception.InvalidDroneStateException;
-import com.musula.drones.common.exception.NotEnoughBatteryException;
+import com.musula.drones.common.exception.drone.DroneMedicationWeightExceedException;
+import com.musula.drones.common.exception.drone.InvalidDroneStateException;
+import com.musula.drones.common.exception.drone.NotEnoughBatteryException;
 import com.musula.drones.domain.drone.constant.DroneExceptionConstant;
 import com.musula.drones.domain.drone.entity.Drone;
 

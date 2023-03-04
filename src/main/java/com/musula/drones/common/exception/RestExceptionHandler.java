@@ -1,5 +1,9 @@
 package com.musula.drones.common.exception;
 
+import com.musula.drones.common.exception.drone.DroneAlreadyExistException;
+import com.musula.drones.common.exception.drone.DroneMedicationWeightExceedException;
+import com.musula.drones.common.exception.drone.InvalidDroneStateException;
+import com.musula.drones.common.exception.drone.NotEnoughBatteryException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
