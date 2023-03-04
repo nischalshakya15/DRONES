@@ -2,6 +2,7 @@ package com.musula.drones.domain.drone.service.impl;
 
 import com.musula.drones.common.constant.DroneConstant;
 import com.musula.drones.common.enums.State;
+import com.musula.drones.common.exception.DroneAlreadyExistException;
 import com.musula.drones.common.exception.NotFoundException;
 import com.musula.drones.domain.drone.constant.DroneExceptionConstant;
 import com.musula.drones.domain.drone.dto.DroneDto;
@@ -13,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -30,6 +32,8 @@ public class DroneServiceImpl implements DroneService {
    */
   @Override
   public DroneDto save(DroneDto droneDto) {
+    checkIfDroneWithSerialNumberExists(droneDto);
+
     Drone drone = droneMapper.toEntity(droneDto);
     drone.setWeightLimit(DroneConstant.WEIGHT_LIMIT);
     drone.setBatteryPercentage(DroneConstant.BATTERY_PERCENTAGE);
@@ -88,5 +92,20 @@ public class DroneServiceImpl implements DroneService {
   public List<DroneDto> findAll() {
     List<Drone> drones = droneRepository.findAll();
     return droneMapper.toDto(drones);
+  }
+
+  /**
+   * It checks if a drone with the given serial number already exists in the database
+   *
+   * @param droneDto The DTO object that we want to validate.
+   */
+  private void checkIfDroneWithSerialNumberExists(DroneDto droneDto) {
+    String serialNumber = droneDto.getSerialNumber();
+    Optional<Drone> optionalDrone = droneRepository.findBySerialNumber(serialNumber);
+
+    if (optionalDrone.isPresent()) {
+      throw new DroneAlreadyExistException(
+          String.format(DroneExceptionConstant.DRONE_ALREADY_EXIST, serialNumber));
+    }
   }
 }

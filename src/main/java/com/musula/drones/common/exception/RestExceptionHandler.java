@@ -88,6 +88,20 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
   }
 
   /**
+   * It handles the exception thrown by the DroneAlreadyExistException class.
+   *
+   * @param exception The exception object that was thrown.
+   * @return A ResponseEntity object is being returned.
+   */
+  @ExceptionHandler(DroneAlreadyExistException.class)
+  protected ResponseEntity<APIException> handleDroneAlreadyExistException(
+      DroneAlreadyExistException exception) {
+    APIException apiException =
+        new APIException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
+    return buildResponseEntity(apiException);
+  }
+
+  /**
    * We are overriding the default Spring Boot exception handler for MethodArgumentNotValidException
    * and returning a map of field names and error messages
    *

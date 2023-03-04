@@ -2,7 +2,7 @@ package com.musula.drones.domain.drone.constant;
 
 public class DroneExceptionConstant {
 
-  public static final String DRONE_NOT_FOUND = "Drone with serialNumber %s not found.";
+  public static final String DRONE_NOT_FOUND = "Drone with %s serialNumber not found.";
 
   public static final String NOT_ENOUGH_BATTER_PERCENTAGE =
       "Battery level is less than %s percent.";
@@ -12,4 +12,6 @@ public class DroneExceptionConstant {
 
   public static final String DRONE_MEDICATION_WEIGHT_EXCEED =
       "Drone can only carry up to 500gr max.";
+
+  public static final String DRONE_ALREADY_EXIST = "Drone with %s serialNumber already registered.";
 }
