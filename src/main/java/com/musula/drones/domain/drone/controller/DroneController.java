@@ -7,6 +7,7 @@ import com.musula.drones.domain.dronemedication.dto.DroneMedicationDto;
 import com.musula.drones.domain.dronemedication.service.DroneMedicationService;
 import com.musula.drones.domain.medication.dto.MedicationDto;
 import com.musula.drones.domain.medication.service.MedicationService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,7 +60,7 @@ public class DroneController {
    * @return A ResponseEntity with a status of 201 (created) and a body of the saved MedicationDto.
    */
   @PostMapping("/medications")
-  public ResponseEntity<MedicationDto> save(@RequestBody MedicationDto medicationDto) {
+  public ResponseEntity<MedicationDto> save(@RequestBody @Valid MedicationDto medicationDto) {
     return ResponseEntity.created(URI.create("/api/v1/drones/medications"))
         .body(medicationService.save(medicationDto));
   }
