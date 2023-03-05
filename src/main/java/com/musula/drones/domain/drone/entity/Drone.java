@@ -1,8 +1,8 @@
 package com.musula.drones.domain.drone.entity;
 
 import com.musula.drones.common.base.BaseEntity;
-import com.musula.drones.domain.drone.enums.DroneModel;
 import com.musula.drones.common.enums.State;
+import com.musula.drones.domain.drone.enums.DroneModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -28,7 +28,7 @@ public class Drone extends BaseEntity {
   private Integer weightLimit;
 
   @Column(name = "battery_percentage")
-  private Integer batteryPercentage;
+  private Double batteryPercentage;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "state", length = 100)

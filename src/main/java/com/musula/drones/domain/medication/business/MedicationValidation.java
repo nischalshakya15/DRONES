@@ -26,8 +26,8 @@ public class MedicationValidation {
    *
    * @param batteryPercentage The percentage of the battery.
    */
-  public static void checkIfTheBatteryIsLessThanTwentyFivePercent(Integer batteryPercentage) {
-    if (batteryPercentage < 25) {
+  public static void checkIfTheBatteryIsLessThanTwentyFivePercent(Double batteryPercentage) {
+    if (batteryPercentage < 25.0d) {
       throw new NotEnoughBatteryException(
           String.format(DroneExceptionConstant.NOT_ENOUGH_BATTER_PERCENTAGE, 25));
     }

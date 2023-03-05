@@ -6,7 +6,7 @@ public class DroneConstant {
 
   public static final Integer WEIGHT_LIMIT = 500;
 
-  public static final Integer BATTERY_PERCENTAGE = 100;
+  public static final Double BATTERY_PERCENTAGE = 100.0d;
 
   public static final State DEFAULT_STATE = State.IDLE;
 

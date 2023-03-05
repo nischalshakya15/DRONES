@@ -19,7 +19,7 @@ public class DroneDto extends BaseDto {
   private Integer weightLimit;
 
   @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-  private Integer batteryPercentage;
+  private Double batteryPercentage;
 
   @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   private State state;

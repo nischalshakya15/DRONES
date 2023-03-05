@@ -2,6 +2,7 @@ package com.musula.drones.schedule;
 
 import com.musula.drones.common.enums.State;
 import com.musula.drones.domain.drone.entity.Drone;
+import com.musula.drones.domain.drone.enums.DroneModel;
 import com.musula.drones.domain.drone.repository.DroneRepository;
 import com.musula.drones.domain.dronemedication.entity.DroneMedication;
 import com.musula.drones.domain.dronemedication.repository.DroneMedicationRepository;
@@ -39,6 +40,28 @@ public class UpdateMedicationStatus {
           State.DELIVERING,
           State.DELIVERED);
 
+  private static final Map<DroneModel, Double> batteryConsumptionMap =
+      Map.of(
+          DroneModel.LIGHT_WEIGHT,
+          0.007,
+          DroneModel.MIDDLE_WEIGHT,
+          0.006,
+          DroneModel.HEAVY_WEIGHT,
+          0.005,
+          DroneModel.CRUISER_WEIGHT,
+          0.008);
+
+  private static final Map<DroneModel, Double> distanceCoverageMap =
+      Map.of(
+          DroneModel.LIGHT_WEIGHT,
+          0.07,
+          DroneModel.MIDDLE_WEIGHT,
+          0.06,
+          DroneModel.HEAVY_WEIGHT,
+          0.05,
+          DroneModel.CRUISER_WEIGHT,
+          0.08);
+
   @Scheduled(fixedDelay = 5000)
   public void updateMedicationStatus() throws InterruptedException {
     List<DroneMedication> medications =
@@ -68,10 +91,18 @@ public class UpdateMedicationStatus {
       if (medication.getState().equals(State.DELIVERED)
           && drone.getState().equals(State.RETURNING)) {
         drone.setState(State.IDLE);
+        drone.setBatteryPercentage(
+            getBatteryPercentage(drone.getModel(), 1000, medication.getWeight()));
         droneRepository.save(drone);
       }
     }
 
     Thread.sleep(10000);
+  }
+
+  private Double getBatteryPercentage(
+      DroneModel droneModel, Integer distanceCovered, Integer weight) {
+    return (batteryConsumptionMap.get(droneModel) * distanceCovered * 2)
+        + (distanceCoverageMap.get(droneModel) * weight);
   }
 }
