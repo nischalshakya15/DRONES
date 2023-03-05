@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="01-alter-column-id-drones" author="Nischal Shakya">
+        <sql>
+            ALTER TABLE drones ALTER COLUMN id RESTART WITH 11;
+        </sql>
+    </changeSet>
+    <changeSet id="02-alter-column-id-medications" author="Nischal Shakya">
+        <sql>
+            ALTER TABLE medications ALTER COLUMN id RESTART WITH 13;
+        </sql>
+    </changeSet>
+    <changeSet id="03-alter-column-id-drone_medications" author="Nischal Shakya">
+        <sql>
+            ALTER TABLE drone_medications ALTER COLUMN id RESTART WITH 13;
+        </sql>
+    </changeSet>
+</databaseChangeLog>
