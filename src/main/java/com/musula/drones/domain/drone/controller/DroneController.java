@@ -71,15 +71,15 @@ public class DroneController {
    * <p>Take drone serialNumber and state of the medication items.
    *
    * @param serialNumber The serial number of the drone.
-   * @param state The state of the medication.
+   * @param medicationState The state of the medication.
    * @return A list of DroneMedicationDto objects.
    */
   @GetMapping("/medications")
   public ResponseEntity<DroneMedicationDto> findMedicationBySerialNumberAndState(
-      @RequestParam("serialNumber") String serialNumber, @RequestParam("state") State state) {
+      @RequestParam("serialNumber") String serialNumber, @RequestParam("medicationState") State medicationState) {
     return ResponseEntity.ok(
         droneMedicationService.findAllMedicationsByDroneSerialNumberAndMedicationState(
-            serialNumber, state));
+            serialNumber, medicationState));
   }
 
   /**
@@ -96,7 +96,7 @@ public class DroneController {
   }
 
   /**
-   * 05. Check drone batter level for a given drone.
+   * 05. Check drone battery level for a given drone.
    *
    * <p>Take the Drone serialNumber to find all the information of the Drone.
    *
