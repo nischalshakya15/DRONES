@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="01-mock-data-drones" author="Nischal Shakya">
+        <loadData
+                file="liquibase/csv/drones.csv"
+                quotchar='"'
+                tableName="drones"/>
+    </changeSet>
+    <changeSet id="02-mock-data-medications" author="Nischal Shakya">
+        <loadData
+                file="liquibase/csv/medications.csv"
+                quotchar='"'
+                tableName="medications"/>
+    </changeSet>
+    <changeSet id="03-mock-data-drone-medications" author="Nischal Shakya">
+        <loadData
+                file="liquibase/csv/drone_medications.csv"
+                quotchar='"'
+                tableName="drone_medications"/>
+    </changeSet>
+</databaseChangeLog>

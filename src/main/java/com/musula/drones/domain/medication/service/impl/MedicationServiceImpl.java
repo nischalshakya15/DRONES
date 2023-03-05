@@ -57,7 +57,7 @@ public class MedicationServiceImpl implements MedicationService {
    */
   private Medication saveMedication(MedicationDto medicationDto) {
     Medication medication = medicationMapper.toEntity(medicationDto);
-    medication.setState(DroneConstant.LOADED_STATE);
+    medication.setState(DroneConstant.LOADING_STATE);
     return medicationRepository.save(medication);
   }
 

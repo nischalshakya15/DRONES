@@ -8,4 +8,6 @@
     <include file="classpath:liquibase/medication/medications.xml" relativeToChangelogFile="false"/>
     <include file="classpath:liquibase/drone_medications/drone_medications.xml" relativeToChangelogFile="false"/>
 
+    <include file="classpath:liquibase/mock_data/mock_data.xml" relativeToChangelogFile="false"/>
+
 </databaseChangeLog>

@@ -11,4 +11,6 @@ public class DroneConstant {
   public static final State DEFAULT_STATE = State.IDLE;
 
   public static final State LOADED_STATE = State.LOADED;
+
+  public static final State LOADING_STATE = State.LOADING;
 }
