@@ -21,4 +21,6 @@ public interface MedicationRepository extends JpaRepository<Medication, Long> {
               + "where d.serialNumber = :serialNumber and m.state = :state")
   List<MedicationDto> findAllMedicationsByDroneSerialNumberAndMedicationState(
       String serialNumber, State state);
+
+  List<Medication> findAllByStateNot(State state);
 }
