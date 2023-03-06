@@ -75,8 +75,9 @@ public class DroneController {
    * @return A list of DroneMedicationDto objects.
    */
   @GetMapping("/medications")
-  public ResponseEntity<DroneMedicationDto> findMedicationBySerialNumberAndState(
-      @RequestParam("serialNumber") String serialNumber, @RequestParam("medicationState") State medicationState) {
+  public ResponseEntity<DroneMedicationDto> findMedicationByDroneSerialNumberAndMedicationState(
+      @RequestParam("serialNumber") String serialNumber,
+      @RequestParam("medicationState") State medicationState) {
     return ResponseEntity.ok(
         droneMedicationService.findAllMedicationsByDroneSerialNumberAndMedicationState(
             serialNumber, medicationState));
