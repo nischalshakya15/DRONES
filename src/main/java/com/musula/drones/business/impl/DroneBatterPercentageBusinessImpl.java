@@ -1,6 +1,7 @@
 package com.musula.drones.business.impl;
 
 import com.musula.drones.business.DroneBatteryPercentageBusiness;
+import com.musula.drones.domain.drone.entity.Drone;
 import com.musula.drones.domain.drone.enums.DroneModel;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +28,34 @@ public class DroneBatterPercentageBusinessImpl implements DroneBatteryPercentage
       Map<DroneModel, Double> distanceCoverageMap) {
     return (batteryConsumptionMap.get(droneModel) * distanceCovered * 2)
         + (distanceCoverageMap.get(droneModel) * weight);
+  }
+
+  /**
+   * The function takes in a drone object, a battery percentage to recharge by, and a total battery
+   * percentage. It then checks if the current battery percentage is not equal to the total battery
+   * percentage. If it is not, it then calculates the battery recharge by, and if the battery
+   * recharge by plus the battery recharge by is greater than or equal to the total battery
+   * percentage, it sets the battery percentage to the difference between the battery percentage and
+   * the current battery percentage. Otherwise, it sets the battery percentage to the battery
+   * recharge by plus the battery recharge by
+   *
+   * @param drone The drone object that needs to be recharged.
+   * @param batteryPercentageToRechargeBy The percentage of battery to be recharged by.
+   * @param totalBatteryPercentage The total battery percentage of the drone.
+   */
+  @Override
+  public void setBatteryPercentage(
+      Drone drone, Double batteryPercentageToRechargeBy, Double totalBatteryPercentage) {
+    Double currentBatteryPercentage = drone.getBatteryPercentage();
+
+    if (!currentBatteryPercentage.equals(totalBatteryPercentage)) {
+      double batteryRechargeBy = (currentBatteryPercentage % totalBatteryPercentage) + batteryPercentageToRechargeBy;
+      if (batteryRechargeBy >= totalBatteryPercentage) {
+        drone.setBatteryPercentage(
+            currentBatteryPercentage + (totalBatteryPercentage - currentBatteryPercentage));
+      } else {
+        drone.setBatteryPercentage(batteryRechargeBy);
+      }
+    }
   }
 }

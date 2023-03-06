@@ -36,7 +36,7 @@ public class DroneServiceImpl implements DroneService {
 
     Drone drone = droneMapper.toEntity(droneDto);
     drone.setWeightLimit(DroneConstant.WEIGHT_LIMIT);
-    drone.setBatteryPercentage(DroneConstant.BATTERY_PERCENTAGE);
+    drone.setBatteryPercentage(DroneConstant.TOTAL_BATTERY_PERCENTAGE);
     drone.setState(DroneConstant.DEFAULT_STATE);
 
     Drone savedDrone = droneRepository.save(drone);

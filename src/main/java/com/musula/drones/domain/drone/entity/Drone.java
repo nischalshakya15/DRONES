@@ -10,9 +10,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Data
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "drones")
 @EqualsAndHashCode(callSuper = true)
 public class Drone extends BaseEntity {

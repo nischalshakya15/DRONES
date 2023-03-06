@@ -9,8 +9,6 @@ public class DroneConstant {
 
   public static final Integer WEIGHT_LIMIT = 500;
 
-  public static final Double BATTERY_PERCENTAGE = 100.0d;
-
   public static final State DEFAULT_STATE = State.IDLE;
 
   public static final State LOADED_STATE = State.LOADED;
@@ -19,7 +17,11 @@ public class DroneConstant {
 
   public static final Integer DISTANCE_COVERED = 1000;
 
+  public static final Double TOTAL_BATTERY_PERCENTAGE = 100.0d;
+
   public static final Double MINIMUM_BATTERY_PERCENTAGE = 25.0d;
+
+  public static final Double BATTERY_TO_RECHARGE_BY = 10.0d;
 
   public static final Map<State, State> stateMap =
       Map.of(
