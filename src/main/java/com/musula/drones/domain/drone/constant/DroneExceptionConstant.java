@@ -4,7 +4,7 @@ public class DroneExceptionConstant {
 
   public static final String DRONE_NOT_FOUND = "Drone with %s serialNumber not found.";
 
-  public static final String NOT_ENOUGH_BATTER_PERCENTAGE =
+  public static final String NOT_ENOUGH_BATTERY_PERCENTAGE =
       "Battery level is less than %s percent.";
 
   public static final String INVALID_DEFAULT_DRONE_STATE =

@@ -1,8 +1,10 @@
 package com.musula.drones.schedule;
 
+import com.musula.drones.business.DroneBatteryPercentageBusiness;
+import com.musula.drones.business.MedicationBusiness;
+import com.musula.drones.common.constant.DroneConstant;
 import com.musula.drones.common.enums.State;
 import com.musula.drones.domain.drone.entity.Drone;
-import com.musula.drones.domain.drone.enums.DroneModel;
 import com.musula.drones.domain.drone.repository.DroneRepository;
 import com.musula.drones.domain.dronemedication.entity.DroneMedication;
 import com.musula.drones.domain.dronemedication.repository.DroneMedicationRepository;
@@ -16,7 +18,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
-import java.util.Map;
 
 @EnableAsync
 @Configuration
@@ -31,37 +32,14 @@ public class UpdateMedicationStatus {
 
   private final DroneMedicationRepository droneMedicationRepository;
 
-  private static final Map<State, State> stateMap =
-      Map.of(
-          State.LOADING,
-          State.LOADED,
-          State.LOADED,
-          State.DELIVERED,
-          State.DELIVERING,
-          State.DELIVERED);
+  private final DroneBatteryPercentageBusiness droneBatteryPercentageBusiness;
 
-  private static final Map<DroneModel, Double> batteryConsumptionMap =
-      Map.of(
-          DroneModel.LIGHT_WEIGHT,
-          0.007,
-          DroneModel.MIDDLE_WEIGHT,
-          0.006,
-          DroneModel.HEAVY_WEIGHT,
-          0.005,
-          DroneModel.CRUISER_WEIGHT,
-          0.008);
+  private final MedicationBusiness medicationBusiness;
 
-  private static final Map<DroneModel, Double> distanceCoverageMap =
-      Map.of(
-          DroneModel.LIGHT_WEIGHT,
-          0.07,
-          DroneModel.MIDDLE_WEIGHT,
-          0.06,
-          DroneModel.HEAVY_WEIGHT,
-          0.05,
-          DroneModel.CRUISER_WEIGHT,
-          0.08);
-
+  /**
+   * It updates the state of the medication and drone based on the current state of the medication
+   * and drone
+   */
   @Scheduled(fixedDelay = 5000)
   public void updateMedicationStatus() throws InterruptedException {
     List<DroneMedication> medications =
@@ -71,16 +49,11 @@ public class UpdateMedicationStatus {
       Medication medication = droneMedication.getMedication();
       Drone drone = droneMedication.getDrone();
 
-      State currentState = medication.getState();
-      if (stateMap.containsKey(currentState)) {
-        State nextState = stateMap.get(currentState);
+      medicationBusiness.setNextMedicationState(medication, DroneConstant.stateMap);
+      medicationRepository.save(medication);
 
-        medication.setState(nextState);
-        medicationRepository.save(medication);
-
-        drone.setState(nextState);
-        droneRepository.save(drone);
-      }
+      drone.setState(medication.getState());
+      droneRepository.save(drone);
 
       if (medication.getState().equals(State.DELIVERED)
           && drone.getState().equals(State.DELIVERED)) {
@@ -92,17 +65,16 @@ public class UpdateMedicationStatus {
           && drone.getState().equals(State.RETURNING)) {
         drone.setState(State.IDLE);
         drone.setBatteryPercentage(
-            getBatteryPercentage(drone.getModel(), 1000, medication.getWeight()));
+            droneBatteryPercentageBusiness.getBatteryPercentage(
+                drone.getModel(),
+                DroneConstant.DISTANCE_COVERED,
+                medication.getWeight(),
+                DroneConstant.batteryConsumptionMap,
+                DroneConstant.distanceCoverageMap));
         droneRepository.save(drone);
       }
     }
 
-    Thread.sleep(10000);
-  }
-
-  private Double getBatteryPercentage(
-      DroneModel droneModel, Integer distanceCovered, Integer weight) {
-    return (batteryConsumptionMap.get(droneModel) * distanceCovered * 2)
-        + (distanceCoverageMap.get(droneModel) * weight);
+    Thread.sleep(1000);
   }
 }

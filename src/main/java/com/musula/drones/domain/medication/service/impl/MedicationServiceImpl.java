@@ -1,11 +1,11 @@
 package com.musula.drones.domain.medication.service.impl;
 
+import com.musula.drones.business.MedicationBusiness;
 import com.musula.drones.common.constant.DroneConstant;
 import com.musula.drones.domain.drone.entity.Drone;
 import com.musula.drones.domain.drone.service.DroneService;
 import com.musula.drones.domain.dronemedication.entity.DroneMedication;
 import com.musula.drones.domain.dronemedication.service.DroneMedicationService;
-import com.musula.drones.domain.medication.business.MedicationValidation;
 import com.musula.drones.domain.medication.dto.MedicationDto;
 import com.musula.drones.domain.medication.entity.Medication;
 import com.musula.drones.domain.medication.mapper.MedicationMapper;
@@ -26,6 +26,8 @@ public class MedicationServiceImpl implements MedicationService {
 
   private final DroneMedicationService droneMedicationService;
 
+  private final MedicationBusiness medicationBusiness;
+
   /**
    * The function saves a medication and creates a relationship between the medication and the drone
    *
@@ -35,7 +37,7 @@ public class MedicationServiceImpl implements MedicationService {
   @Override
   public MedicationDto save(MedicationDto medicationDto) {
     Drone drone = droneService.findBySerialNumber(medicationDto.getDroneSerialNumber());
-    MedicationValidation.checkDrone(drone, medicationDto.getWeight());
+    medicationBusiness.checkDrone(drone, medicationDto.getWeight());
 
     Medication medication = saveMedication(medicationDto);
 
