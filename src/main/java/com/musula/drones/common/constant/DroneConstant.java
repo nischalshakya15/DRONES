@@ -28,7 +28,7 @@ public class DroneConstant {
           State.LOADING,
           State.LOADED,
           State.LOADED,
-          State.DELIVERED,
+          State.DELIVERING,
           State.DELIVERING,
           State.DELIVERED);
 
