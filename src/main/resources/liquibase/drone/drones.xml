@@ -5,7 +5,6 @@
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="01-Drones" author="Nischal Shakya">
-
         <createTable tableName="drones">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -20,7 +19,12 @@
             <column name="created_at" type="datetime"/>
             <column name="updated_at" type="datetime"/>
         </createTable>
+    </changeSet>
 
+    <changeSet id="02-Drones" author="Nischal Shakya">
+        <addColumn tableName="drones">
+            <column name="is_charging" type="boolean"/>
+        </addColumn>
     </changeSet>
 
 </databaseChangeLog>

@@ -47,7 +47,7 @@ public class DroneBatterPercentageBusinessImpl implements DroneBatteryPercentage
    * @param totalBatteryPercentage The total battery percentage of the drone.
    */
   @Override
-  public void setBatteryPercentage(
+  public void setBatteryPercentageAndIsCharging(
       Drone drone, Double batteryPercentageToRechargeBy, Double totalBatteryPercentage) {
     Double currentBatteryPercentage = drone.getBatteryPercentage();
 
@@ -57,8 +57,10 @@ public class DroneBatterPercentageBusinessImpl implements DroneBatteryPercentage
       if (batteryRechargeBy >= totalBatteryPercentage) {
         drone.setBatteryPercentage(
             currentBatteryPercentage + (totalBatteryPercentage - currentBatteryPercentage));
+        drone.setCharging(false);
       } else {
         drone.setBatteryPercentage(batteryRechargeBy);
+        drone.setCharging(true);
       }
     }
   }

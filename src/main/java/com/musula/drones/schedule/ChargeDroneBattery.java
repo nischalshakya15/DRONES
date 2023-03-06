@@ -26,6 +26,10 @@ public class ChargeDroneBattery {
 
   private final DroneBatteryPercentageBusiness droneBatteryPercentageBusiness;
 
+  /**
+   * It finds all the drones that are idle and have a battery percentage less than 100%, and then
+   * charges them by 10% every 10 seconds
+   */
   @Scheduled(fixedDelay = 10000)
   public void chargeDrones() {
     List<Drone> drones =
@@ -36,7 +40,7 @@ public class ChargeDroneBattery {
         drones.stream()
             .peek(
                 drone ->
-                    droneBatteryPercentageBusiness.setBatteryPercentage(
+                    droneBatteryPercentageBusiness.setBatteryPercentageAndIsCharging(
                         drone,
                         DroneConstant.BATTERY_TO_RECHARGE_BY,
                         DroneConstant.TOTAL_BATTERY_PERCENTAGE))

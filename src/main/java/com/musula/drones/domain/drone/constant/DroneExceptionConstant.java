@@ -17,4 +17,6 @@ public class DroneExceptionConstant {
 
   public static final String NOT_ENOUGH_BATTERY =
       "Battery level is not enough to deliver the medication items.";
+
+  public static final String DRONE_IS_BEING_CHARGED = "%s serialNumber drone is charging.";
 }

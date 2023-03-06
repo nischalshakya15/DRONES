@@ -23,4 +23,7 @@ public class DroneDto extends BaseDto {
 
   @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   private State state;
+
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+  private boolean charging;
 }

@@ -14,7 +14,7 @@ public interface DroneBatteryPercentageBusiness {
       Map<DroneModel, Double> batteryConsumptionMap,
       Map<DroneModel, Double> distanceCoverageMap);
 
-  void setBatteryPercentage(
+  void setBatteryPercentageAndIsCharging(
       Drone drone, Double batteryPercentageToRechargeBy, Double totalBatteryPercentage);
 
   void checkBatteryPercentage(

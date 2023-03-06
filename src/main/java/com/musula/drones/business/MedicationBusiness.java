@@ -20,4 +20,6 @@ public interface MedicationBusiness {
   State getNextMedicationState(State currentState, Map<State, State> stateMap);
 
   void setNextMedicationState(Medication medication, Map<State, State> stateMap);
+
+  void checkIfTheDroneIsCharging(Drone drone);
 }

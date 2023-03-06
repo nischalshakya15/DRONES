@@ -20,6 +20,10 @@ public class CheckDroneBatteryLevels {
 
   private final DroneRepository droneRepository;
 
+  /**
+   * It will run every 5 seconds and print the serial number and battery percentage of all the
+   * drones in the database
+   */
   @Scheduled(fixedRate = 5000)
   public void scheduleBatteryLevelCheck() throws InterruptedException {
     List<Drone> drones = droneRepository.findAll();

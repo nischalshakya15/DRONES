@@ -1,6 +1,7 @@
 package com.musula.drones.common.exception;
 
 import com.musula.drones.common.exception.drone.DroneAlreadyExistException;
+import com.musula.drones.common.exception.drone.DroneChargingException;
 import com.musula.drones.common.exception.drone.DroneMedicationWeightExceedException;
 import com.musula.drones.common.exception.drone.InvalidDroneStateException;
 import com.musula.drones.common.exception.drone.NotEnoughBatteryException;
@@ -101,6 +102,20 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
   @ExceptionHandler(DroneAlreadyExistException.class)
   protected ResponseEntity<APIException> handleDroneAlreadyExistException(
       DroneAlreadyExistException exception) {
+    APIException apiException =
+        new APIException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
+    return buildResponseEntity(apiException);
+  }
+
+  /**
+   * It handles the DroneChargingException and returns a response entity with the exception message.
+   *
+   * @param exception The exception object that was thrown.
+   * @return A ResponseEntity object is being returned.
+   */
+  @ExceptionHandler(DroneChargingException.class)
+  protected ResponseEntity<APIException> handleDroneChargingException(
+      DroneChargingException exception) {
     APIException apiException =
         new APIException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
     return buildResponseEntity(apiException);

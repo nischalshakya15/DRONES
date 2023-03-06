@@ -3,6 +3,7 @@ package com.musula.drones.business.impl;
 import com.musula.drones.business.MedicationBusiness;
 import com.musula.drones.common.constant.DroneConstant;
 import com.musula.drones.common.enums.State;
+import com.musula.drones.common.exception.drone.DroneChargingException;
 import com.musula.drones.common.exception.drone.DroneMedicationWeightExceedException;
 import com.musula.drones.common.exception.drone.InvalidDroneStateException;
 import com.musula.drones.common.exception.drone.NotEnoughBatteryException;
@@ -23,6 +24,7 @@ public class MedicationBusinessImpl implements MedicationBusiness {
    * @param medicationWeight The weight of the medication that the drone is carrying.
    */
   public void checkDrone(Drone drone, Integer medicationWeight) {
+    checkIfTheDroneIsCharging(drone);
     checkIfTheDroneStateIsIdle(drone.getState());
     checkIfTheBatteryIsLessThanTwentyFivePercent(drone.getBatteryPercentage());
     checkIfTheWeightLimitIsGreaterThanMedicationWeight(drone.getWeightLimit(), medicationWeight);
@@ -94,5 +96,18 @@ public class MedicationBusinessImpl implements MedicationBusiness {
    */
   public void setNextMedicationState(Medication medication, Map<State, State> stateMap) {
     medication.setState(getNextMedicationState(medication.getState(), stateMap));
+  }
+
+  /**
+   * If the drone is charging, throw a DroneChargingException.
+   *
+   * @param drone The drone that is being checked.
+   */
+  @Override
+  public void checkIfTheDroneIsCharging(Drone drone) {
+    if (drone.isCharging()) {
+      throw new DroneChargingException(
+          String.format(DroneExceptionConstant.DRONE_IS_BEING_CHARGED, drone.getSerialNumber()));
+    }
   }
 }

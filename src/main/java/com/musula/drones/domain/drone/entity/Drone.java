@@ -37,4 +37,7 @@ public class Drone extends BaseEntity {
   @Enumerated(EnumType.STRING)
   @Column(name = "state", length = 100)
   private State state;
+
+  @Column(name = "is_charging")
+  private boolean isCharging;
 }
