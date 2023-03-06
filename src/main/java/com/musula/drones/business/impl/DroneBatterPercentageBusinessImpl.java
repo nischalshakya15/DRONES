@@ -23,7 +23,7 @@ public class DroneBatterPercentageBusinessImpl implements DroneBatteryPercentage
    * @param distanceCoverageMap This is a map of drone models and their distance coverage.
    * @return The battery percentage of the drone.
    */
-  public Double getBatteryPercentage(
+  public Double getBatteryConsumptionPercentage(
       DroneModel droneModel,
       Integer distanceCovered,
       Integer weight,
@@ -81,7 +81,7 @@ public class DroneBatterPercentageBusinessImpl implements DroneBatteryPercentage
       Map<DroneModel, Double> batteryConsumptionMap,
       Map<DroneModel, Double> distanceCoverageMap) {
     Double batteryConsumption =
-        getBatteryPercentage(
+        getBatteryConsumptionPercentage(
             drone.getModel(),
             DroneConstant.DISTANCE_COVERED,
             weight,

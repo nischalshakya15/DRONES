@@ -64,13 +64,16 @@ public class UpdateMedicationStatus {
       if (medication.getState().equals(State.DELIVERED)
           && drone.getState().equals(State.RETURNING)) {
         drone.setState(State.IDLE);
-        drone.setBatteryPercentage(
-            droneBatteryPercentageBusiness.getBatteryPercentage(
+
+        Double batteryConsumptionPercentage =
+            droneBatteryPercentageBusiness.getBatteryConsumptionPercentage(
                 drone.getModel(),
                 DroneConstant.DISTANCE_COVERED,
                 medication.getWeight(),
                 DroneConstant.batteryConsumptionMap,
-                DroneConstant.distanceCoverageMap));
+                DroneConstant.distanceCoverageMap);
+
+        drone.setBatteryPercentage(Math.abs(drone.getBatteryPercentage() - batteryConsumptionPercentage));
         droneRepository.save(drone);
       }
     }

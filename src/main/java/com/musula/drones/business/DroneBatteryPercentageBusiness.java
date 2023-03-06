@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface DroneBatteryPercentageBusiness {
 
-  Double getBatteryPercentage(
+  Double getBatteryConsumptionPercentage(
       DroneModel droneModel,
       Integer distanceCovered,
       Integer weight,
