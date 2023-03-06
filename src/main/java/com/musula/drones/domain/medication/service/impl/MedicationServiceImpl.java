@@ -38,6 +38,8 @@ public class MedicationServiceImpl implements MedicationService {
   public MedicationDto save(MedicationDto medicationDto) {
     Drone drone = droneService.findBySerialNumber(medicationDto.getDroneSerialNumber());
     medicationBusiness.checkDrone(drone, medicationDto.getWeight());
+    drone.setState(DroneConstant.LOADING_STATE);
+    droneService.saveDrone(drone);
 
     Medication medication = saveMedication(medicationDto);
 

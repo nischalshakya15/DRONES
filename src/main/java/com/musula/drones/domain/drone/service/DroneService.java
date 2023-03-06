@@ -11,6 +11,8 @@ public interface DroneService {
 
   DroneDto save(DroneDto droneDto);
 
+  Drone saveDrone(Drone drone);
+
   Drone findBySerialNumber(String serialNumber) throws NotFoundException;
 
   List<DroneDto> findAllByState(State droneState);
