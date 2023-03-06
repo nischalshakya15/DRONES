@@ -29,9 +29,11 @@ public class CheckDroneBatteryLevels {
     List<Drone> drones = droneRepository.findAll();
     for (Drone drone : drones) {
       log.info(
-          "Serial Number: {} and Battery Level: {}",
+          "Model: {}, Serial Number: {}, Battery Level: {}, and State: {}",
+          drone.getModel(),
           drone.getSerialNumber(),
-          drone.getBatteryPercentage());
+          drone.getBatteryPercentage(),
+          drone.getState());
     }
     Thread.sleep(5000);
   }

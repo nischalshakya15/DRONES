@@ -1,7 +1,6 @@
 package com.musula.drones.business.impl;
 
 import com.musula.drones.business.DroneBatteryPercentageBusiness;
-import com.musula.drones.common.constant.DroneConstant;
 import com.musula.drones.common.exception.drone.NotEnoughBatteryException;
 import com.musula.drones.domain.drone.constant.DroneExceptionConstant;
 import com.musula.drones.domain.drone.entity.Drone;
@@ -29,8 +28,8 @@ public class DroneBatterPercentageBusinessImpl implements DroneBatteryPercentage
       Integer weight,
       Map<DroneModel, Double> batteryConsumptionMap,
       Map<DroneModel, Double> distanceCoverageMap) {
-    return (batteryConsumptionMap.get(droneModel) * distanceCovered * 2)
-        + (distanceCoverageMap.get(droneModel) * weight);
+    return ((batteryConsumptionMap.get(droneModel) * distanceCovered * 2)
+        + (distanceCoverageMap.get(droneModel) * weight));
   }
 
   /**
@@ -84,12 +83,7 @@ public class DroneBatterPercentageBusinessImpl implements DroneBatteryPercentage
       Map<DroneModel, Double> distanceCoverageMap) {
     Double batteryConsumption =
         getBatteryConsumptionPercentage(
-            drone.getModel(),
-            DroneConstant.DISTANCE_COVERED,
-            weight,
-            DroneConstant.batteryConsumptionMap,
-            DroneConstant.distanceCoverageMap);
-
+            drone.getModel(), distanceCovered, weight, batteryConsumptionMap, distanceCoverageMap);
     if (drone.getBatteryPercentage() < batteryConsumption) {
       throw new NotEnoughBatteryException(DroneExceptionConstant.NOT_ENOUGH_BATTERY);
     }
