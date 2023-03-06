@@ -1,6 +1,9 @@
 package com.musula.drones.business.impl;
 
 import com.musula.drones.business.DroneBatteryPercentageBusiness;
+import com.musula.drones.common.constant.DroneConstant;
+import com.musula.drones.common.exception.drone.NotEnoughBatteryException;
+import com.musula.drones.domain.drone.constant.DroneExceptionConstant;
 import com.musula.drones.domain.drone.entity.Drone;
 import com.musula.drones.domain.drone.enums.DroneModel;
 import org.springframework.stereotype.Service;
@@ -49,13 +52,44 @@ public class DroneBatterPercentageBusinessImpl implements DroneBatteryPercentage
     Double currentBatteryPercentage = drone.getBatteryPercentage();
 
     if (!currentBatteryPercentage.equals(totalBatteryPercentage)) {
-      double batteryRechargeBy = (currentBatteryPercentage % totalBatteryPercentage) + batteryPercentageToRechargeBy;
+      double batteryRechargeBy =
+          (currentBatteryPercentage % totalBatteryPercentage) + batteryPercentageToRechargeBy;
       if (batteryRechargeBy >= totalBatteryPercentage) {
         drone.setBatteryPercentage(
             currentBatteryPercentage + (totalBatteryPercentage - currentBatteryPercentage));
       } else {
         drone.setBatteryPercentage(batteryRechargeBy);
       }
+    }
+  }
+
+  /**
+   * It checks if the drone has enough battery to cover the distance
+   *
+   * @param drone The drone object
+   * @param distanceCovered The distance to be covered by the drone.
+   * @param weight The weight of the package to be delivered
+   * @param batteryConsumptionMap This is a map of drone model and the battery consumption for that
+   *     model.
+   * @param distanceCoverageMap This is a map of drone model and the distance it can cover.
+   */
+  @Override
+  public void checkBatteryPercentage(
+      Drone drone,
+      Integer distanceCovered,
+      Integer weight,
+      Map<DroneModel, Double> batteryConsumptionMap,
+      Map<DroneModel, Double> distanceCoverageMap) {
+    Double batteryConsumption =
+        getBatteryPercentage(
+            drone.getModel(),
+            DroneConstant.DISTANCE_COVERED,
+            weight,
+            DroneConstant.batteryConsumptionMap,
+            DroneConstant.distanceCoverageMap);
+
+    if (drone.getBatteryPercentage() < batteryConsumption) {
+      throw new NotEnoughBatteryException(DroneExceptionConstant.NOT_ENOUGH_BATTERY);
     }
   }
 }

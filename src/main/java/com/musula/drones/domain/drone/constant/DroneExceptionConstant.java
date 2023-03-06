@@ -14,4 +14,7 @@ public class DroneExceptionConstant {
       "Drone can only carry up to 500gr max.";
 
   public static final String DRONE_ALREADY_EXIST = "Drone with %s serialNumber already registered.";
+
+  public static final String NOT_ENOUGH_BATTERY =
+      "Battery level is not enough to deliver the medication items.";
 }

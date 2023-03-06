@@ -1,5 +1,6 @@
 package com.musula.drones.domain.medication.service.impl;
 
+import com.musula.drones.business.DroneBatteryPercentageBusiness;
 import com.musula.drones.business.MedicationBusiness;
 import com.musula.drones.common.constant.DroneConstant;
 import com.musula.drones.domain.drone.entity.Drone;
@@ -28,6 +29,8 @@ public class MedicationServiceImpl implements MedicationService {
 
   private final MedicationBusiness medicationBusiness;
 
+  private final DroneBatteryPercentageBusiness droneBatteryPercentageBusiness;
+
   /**
    * The function saves a medication and creates a relationship between the medication and the drone
    *
@@ -37,7 +40,15 @@ public class MedicationServiceImpl implements MedicationService {
   @Override
   public MedicationDto save(MedicationDto medicationDto) {
     Drone drone = droneService.findBySerialNumber(medicationDto.getDroneSerialNumber());
+
     medicationBusiness.checkDrone(drone, medicationDto.getWeight());
+    droneBatteryPercentageBusiness.checkBatteryPercentage(
+        drone,
+        DroneConstant.DISTANCE_COVERED,
+        medicationDto.getWeight(),
+        DroneConstant.batteryConsumptionMap,
+        DroneConstant.distanceCoverageMap);
+
     drone.setState(DroneConstant.LOADING_STATE);
     droneService.saveDrone(drone);
 
