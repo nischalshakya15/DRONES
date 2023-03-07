@@ -73,11 +73,16 @@ public class UpdateMedicationStatus {
                 DroneConstant.batteryConsumptionMap,
                 DroneConstant.distanceCoverageMap);
 
-        drone.setBatteryPercentage(Math.abs(drone.getBatteryPercentage() - batteryConsumptionPercentage));
+        drone.setBatteryPercentage(
+            Math.abs(drone.getBatteryPercentage() - batteryConsumptionPercentage));
         droneRepository.save(drone);
       }
     }
 
-    Thread.sleep(1000);
+    try {
+      Thread.sleep(10000);
+    } catch (InterruptedException e) {
+      log.error("Interrupted exception with {}.", e.getMessage());
+    }
   }
 }

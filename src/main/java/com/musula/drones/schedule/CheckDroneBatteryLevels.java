@@ -25,7 +25,7 @@ public class CheckDroneBatteryLevels {
    * drones in the database
    */
   @Scheduled(fixedRate = 5000)
-  public void scheduleBatteryLevelCheck() throws InterruptedException {
+  public void scheduleBatteryLevelCheck() {
     List<Drone> drones = droneRepository.findAll();
     for (Drone drone : drones) {
       log.info(
@@ -35,6 +35,10 @@ public class CheckDroneBatteryLevels {
           drone.getBatteryPercentage(),
           drone.getState());
     }
-    Thread.sleep(5000);
+    try {
+      Thread.sleep(5000);
+    } catch (InterruptedException e) {
+      log.error("Interrupted exception with {}.", e.getMessage());
+    }
   }
 }
