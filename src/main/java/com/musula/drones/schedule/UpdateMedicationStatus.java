@@ -80,7 +80,7 @@ public class UpdateMedicationStatus {
     }
 
     try {
-      Thread.sleep(10000);
+      Thread.sleep(5000);
     } catch (InterruptedException e) {
       log.error("Interrupted exception with {}.", e.getMessage());
     }
