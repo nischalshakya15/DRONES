@@ -34,6 +34,16 @@ small items that are (urgently) needed in locations with difficult access.
   java -jar target/drones-0.0.1-SNAPSHOT.jar 
   ```
 
+#### Run the test
+
+* Run the below command to run the test.
+
+```shell
+./mvnw test
+```
+
+---------------------------------------------------------------------------------------------------------
+
 #### Access to the API documentation
 
 * Open the browser.
@@ -41,6 +51,8 @@ small items that are (urgently) needed in locations with difficult access.
   ```textmate
   http://localhost:8080/swagger-ui/index.html#/
   ```
+
+----
 
 #### Access to the H2 console
 
@@ -50,6 +62,8 @@ small items that are (urgently) needed in locations with difficult access.
   http://localhost:8080/h2-console/
   ```
 * username: **sa**, and password: **password** to authenticate the h2 database.
+
+-------
 
 ### API endpoints
 
@@ -216,4 +230,32 @@ small items that are (urgently) needed in locations with difficult access.
 }
 ```
 
+------------------------------------------
 
+### Battery consumption calculation formula.
+
+|MODEL |Consumption by distance coverage (1M)|Consumption by weight (1g)|Battery Consumption|
+|------|-----------------------------|--------------------------------|----------------------|
+|LIGHT_WEIGHT   |0.007               |0.07                        |49|
+|MIDDLE_WEIGHT  |0.006               |0.06                        |42|
+|HEAVY_WEIGHT   |0.005               |0.05                        |35|
+|CRUISER_WEIGHT |0.008               |0.08                        |56|
+
+**total_battery_consumption = (1M distance coverage * distance * 2) + (1g charge consumption * Weight of medication
+items)**
+
+Here, 2 indicate the drone travel from source to destination and vice versa.
+
+------------------------------------------
+
+### Assumed Functional Requirements.
++ The medication items in the drone can only be loaded if it is not in the below state.
+  + Drone is not charging.
+  + Drone is IDLE.
+  + Drone battery is less than 25%.
+  + Drone doesn't have enough battery to carry the medication items from source to destination.
++ Once medication items are loaded into Drone. The state of both the medication and the drone changes every 5 seconds.
++ Medication state change from **LOADING - LOADED - LOADED - DELIVERING - DELIVERING - DELIVERED.**
++ Drone state change from **LOADING - LOADED - LOADED - DELIVERING - DELIVERING - DELIVERED - DELIVERED - RETURNING - RETURNING - IDLE.**
++ Drone battery will be charged automatically if the drone state is IDLE, and the battery is less than 100 percent.
++ Drone battery will be increased by 10% every 10 seconds.
